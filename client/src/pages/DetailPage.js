@@ -1,40 +1,41 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import LoadingSpinner from '../components/LoadingSpinner';
+// import LoadingSpinner from '../components/LoadingSpinner';
 
 export default function DetailPage() {
   const { id } = useParams();
   const [post, setPost] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const history = useHistory();
-
-  const getPost = (id) => {
-    axios.get(`http://localhost:3001/posts/${id}`)
-      .then(res => {
-        setPost(res.data);
-        setLoading(false);
+  
+  const getPost = async () => {
+    await axios.get(`/api/userData/?id=${id}`)
+    .then((res) => {
+      setPost(res.data);
+      console.log(res.data);
+        // setLoading(false);
       })
   };
   useEffect(() => {
     getPost(id);
   }, [id]);
 
-  const prientdate = (stamp) => {
-    return new Date().toLocaleString();
-  };
+  // const prientdate = (stamp) => {
+  //   return new Date(stamp).toLocaleString();
+  // };
 
-  if (loading) {
-    return <LoadingSpinner />
-  };
+  // if (loading) {
+  //   return <LoadingSpinner />
+  // };
 
   return (
     <>
       <h1>Detail page</h1>
       <h4 className='mt-5'>{post.title}</h4>
-      <div className="text-muted">
+      {/* <div className="text-muted">
         Create At : {prientdate(post.createAt)}
-      </div>
+      </div> */}
       <hr />
       <div className="card" style={{width: '100%'}}>
         <div className="card-body">

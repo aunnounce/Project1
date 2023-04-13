@@ -8,11 +8,10 @@ export default function Blog() {
   const history = useHistory();
   const TopCursor = useRef();
 
-  const saveData = () => {
-    axios.post('http://localhost:3001/posts', {
+  const saveData = async () => {
+    await axios.post('/api/userData', {
       title,
       body,
-      createAt: Date.now()
     })
     alert('저장이 완료 되었습니다.');
     setTitle('');

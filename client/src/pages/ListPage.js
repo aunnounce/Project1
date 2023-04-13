@@ -2,28 +2,28 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Card from '../components/Card';
-import LoadingSpinner from '../components/LoadingSpinner';
+// import LoadingSpinner from '../components/LoadingSpinner';
 
 export default function ListPage() {
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const history = useHistory();
 
-  const getData = () => {
-    axios.get('http://localhost:3001/posts')
+  const getData = async () => {
+    await axios.get('/api/userData')
       .then(res => {
         setPosts(res.data);
-        setLoading(false);
+        // setLoading(false);
       })
   };
   useEffect(() => {
     getData();
   }, []);
 
-  const btnDel = (e, id) => {
+  const btnDel = async (e, id) => {
     e.stopPropagation();
     if (window.confirm('정말 삭제 하시겠습니까?')) {
-      axios.delete(`http://localhost:3001/posts/${id}`)
+      await axios.delete(`/api/userData/${id}`)
         .then(() => {
           setPosts(prevPost => {
             return prevPost.filter(post => {
@@ -35,11 +35,11 @@ export default function ListPage() {
   };
 
   const loadingSpinner = () => {
-    if (loading) {
-      return (
-        <LoadingSpinner />
-      );
-    };
+    // if (loading) {
+    //   return (
+    //     <LoadingSpinner />
+    //   );
+    // };
     if (posts.length === 0) {
       return <span style={{color: 'blue'}}>저장된 데이터가 없습니다.</span>
     };
