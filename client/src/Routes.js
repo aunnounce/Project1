@@ -1,8 +1,8 @@
-import HomePage from './pages/HomePage';
-import ListPage from './pages/ListPage';
-import CreatePage from './pages/CreatePage';
-import EditPage from './pages/Editpage';
-import DetailPage from './pages/DetailPage';
+import HomePage from './Pages/HomePage';
+import ListPage from './Pages/ListPage';
+import CreatePage from './Pages/CreatePage';
+import EditPage from './Pages/EditPage';
+import DetailPage from './Pages/DetailPage';
 
 const Routes = [
   {

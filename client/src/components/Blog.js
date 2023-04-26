@@ -1,10 +1,10 @@
-import axios from 'axios';
 import { useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Blog() {
   const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
+  const [body, setbody] = useState('');
   const history = useHistory();
   const TopCursor = useRef();
 
@@ -12,18 +12,18 @@ export default function Blog() {
     await axios.post('/api/userData', {
       title,
       body,
+      createAt: Date.now()
     })
     alert('저장이 완료 되었습니다.');
     setTitle('');
-    setBody('');
-    history.push('/blogs');
+    setbody('');
     TopCursor.current.focus();
+    history.push('/blogs');
   };
-  
   return (
-    <div>
+    <div className="container">
       <h1>Create a blog post</h1>
-      <div className="mt-3">
+      <div className='mt-3'>
         <label className="form-label">Title</label>
         <input 
           className="form-control" 
@@ -32,12 +32,12 @@ export default function Blog() {
           ref={TopCursor}
         />
       </div>
-      <div className="mt-3">
+      <div className='mt-3'>
         <label className="form-label">Body</label>
         <textarea
           className="form-control" 
           value={body}
-          onChange={e => setBody(e.target.value)}
+          onChange={e => setbody(e.target.value)}
           rows='15'
         />
       </div>
